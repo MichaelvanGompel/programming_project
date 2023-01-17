@@ -1,0 +1,97 @@
+{% extends "streams_flow/layout.html" %}
+
+{% block title %}
+streams flow
+{% endblock %}
+
+{% block body %}
+
+
+{% if user.is_authenticated %}
+    <h2  > lastfm name: {{ lastfmuser }}</h2>
+    <ul class = "stats">
+        <li>
+            <p>You've listend to {{ song_number }} songs</p>
+        </li>
+        <li> 
+            <p>With {{ artist_number }} artists</p>
+        </li>
+        <li>
+            <a href="{% url 'send_file'%}">Download csv file</a>
+        </li>
+    </ul>
+    <hr>
+    <button class="btn btn-sm btn-outline-primary" onclick="set_visibility('default')">4 Weeks</button>
+    <button class="btn btn-sm btn-outline-primary" onclick="set_visibility('half_year')">Half Year</button>
+    <button class="btn btn-sm btn-outline-primary" onclick="set_visibility('year')">Year</button>
+    <button class="btn btn-sm btn-outline-primary" onclick="set_visibility('all_plays')">All</button>
+    <hr>
+    <ul>
+        <div id="default">        
+            <li>
+                <div class="graph">
+                    {{ graph_div_artist_default|safe }}
+            
+                </div>
+            </li>
+        
+
+        
+            <li>
+                <div class="graph">
+                    {{ graph_div_genre_default|safe }}
+                
+                </div>
+            </li>
+        </div>
+        <div style= "display: none;" id="half_year">
+            <li>
+                <div class="graph">
+                    {{ graph_div_artist_half_year|safe }}
+                
+                </div>
+            </li>
+            
+            <li>
+                <div class="graph">
+                    {{ graph_div_genre_half_year|safe }}
+                
+                </div>
+            </li>
+        </div>
+        <div style= "display: none;" id="year">
+            <li>
+                <div class="graph">
+                    {{ graph_div_artist_year|safe }}
+                
+                </div>
+            </li>
+            
+            <li>
+                <div class="graph">
+                    {{ graph_div_genre_year|safe }}
+                
+                </div>
+            </li>
+        </div>
+        <div style= "display: none;" id="all_plays">
+            <li>
+                <div class="graph">
+                    {{ graph_div_artist_all|safe }}
+                
+                </div>
+            </li>
+            
+            <li>
+                <div class="graph">
+                    {{ graph_div_genre_all|safe }}
+                
+                </div>
+            </li>
+        </div>
+        
+        
+    </ul>
+    
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "streams_flow/layout.html" %}
+
+{% block title %}
+streams flow
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <ul>
+        {% if user.is_authenticated %}
+            <li><h2> lastfm name: {{ lastfmuser }}</h2></li>
+            <li> <a href="{% url 'create_plot'%}">Create my plots</a> </li>
+        {% endif %}
+        <li>
+            <form method="POST" name="lastfm_user" action="{% url 'get_lastfm' %}">
+                {% csrf_token %}
+                <input type="text" name="lastfm_user">
+                <input type="submit" value="get my data!">
+        
+            </form>
+        </li>
+    </ul>
+    
+
+</div>
+
+
+{% endblock %}
